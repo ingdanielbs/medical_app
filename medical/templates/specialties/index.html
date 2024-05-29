@@ -1,10 +1,34 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h3 class="text-center">Especialidades</h3>
+    <h3 class="text-center mb-4">Especialidades</h3>
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalId">Registrar especialidad</button>
+    <button type="button" class="btn btn-primary btn-lg mb-4" data-bs-toggle="modal" data-bs-target="#modalId">Registrar especialidad</button>
     
-    <!-- Modal -->
+    <div class="table-responsive">        
+        <table class="table table-primary datatable-init-export nowrap" data-export-title="Export">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre de la especialidad</th>
+                    <th scope="col"></th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for specialty in specialties %}
+                    <tr class="">
+                        <td>{{ specialty.name }}</td>
+                        <td>
+                            <a href="#" class="fas fa-edit text-info mx-1" data-bs-toggle="modal" data-bs-target="#editModalId"></a>
+                            <a href="#" class="fas fa-trash text-danger mx-1"></a>
+                        </td>                        
+                    </tr>
+                {% endfor %}
+                
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal registrar -->
     <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -23,6 +47,28 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal editar -->
+<div class="modal fade" id="editModalId" tabindex="-1" role="dialog" aria-labelledby="editModalTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalTitleId">
+                    Editar especialidad
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {% include 'specialties/form.html' %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     
 {% endblock %}  
