@@ -28,3 +28,12 @@ def edit_specialty(request, id):
             messages.error(request, 'No se puede actualizar la especialidad.')
     return render(request, "specialties/edit.html", {'form': form})
 
+def delete_specialty(request, id):
+    specialty = Specialty.objects.get(id=id)
+    try:
+        specialty.delete()
+        messages.success(request, 'Especialidad eliminada correctamente.')
+        return redirect('specialties')
+    except:
+        messages.error(request, 'No se puede eliminar la especialidad.')
+        return redirect('specialties')

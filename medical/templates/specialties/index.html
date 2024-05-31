@@ -19,7 +19,7 @@
                         <td>{{ specialty.name }}</td>
                         <td>
                             <a href="#" class="fas fa-edit text-info mx-1" data-bs-toggle="modal" data-bs-target="#editModalId"></a>
-                            <a href="#" class="fas fa-trash text-danger mx-1"></a>
+                            <a href="{% url 'delete_specialty' specialty.id %}" class="fas fa-trash text-danger mx-1"></a>
                         </td>                        
                     </tr>
                 {% endfor %}
@@ -68,6 +68,18 @@
         </div>
     </div>
 </div>
+
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            Swal.fire({
+                icon: "{{ message.tags }}",
+                title: "{{ message.tags }}",
+                text: "{{ message }}"
+            });
+        </script>
+    {% endfor %}
+{% endif %}
 
 
     
